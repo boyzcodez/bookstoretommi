@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Books</title>
-
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <!-- <style>
         body {
             font-family: Georgia, "Times New Roman", serif;
@@ -31,7 +31,7 @@
 
     <h1>Books</h1>
 
-    <table>
+    <table class="table table-striped">
 
         <thead>
             <tr>
@@ -53,7 +53,8 @@
                 <td th:text="${book.isbn}"></td>
                 <td th:text="${book.publicationYear}"></td>
                 <td th:text="${book.price}"></td>
-                <td><a th:href="@{/deletebook/{id}(id=${book.id})}">Delete</a></td>
+                <td><a class="btn btn-danger" th:href="@{/deletebook/{id}(id=${book.id})}">Delete</a></td>
+                <td><a th:href="@{/editbook/{id}(id=${book.id})}">Edit</a></td>
 
             </tr>
 
@@ -63,7 +64,7 @@
 
     </table>
 
-    <a href="/addbook">Add</a>
+    <a class="btn btn-success" href="/addbook">Add</a>
 
 </body>
 </html>
