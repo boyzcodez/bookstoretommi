@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fi.haaga.bookstoretommi.domain.Book;
 import fi.haaga.bookstoretommi.domain.BookRepository;
-import fi.haaga.bookstoretommi.domain.BookTypeRepository;
-import fi.haaga.bookstoretommi.domain.BookType;
+import fi.haaga.bookstoretommi.domain.CategoryRepository;
+import fi.haaga.bookstoretommi.domain.Category;
 
 @Controller
 public class BookController {
 
     private BookRepository bookRepository;
-    private BookTypeRepository bookTypeRepository;
+    private CategoryRepository categoryRepository;
 
-    public BookController(BookRepository bookRepository, BookTypeRepository bookTypeRepository){
+    public BookController(BookRepository bookRepository, CategoryRepository categoryRepository){
         this.bookRepository = bookRepository;
-        this.bookTypeRepository = bookTypeRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @RequestMapping("/index")
@@ -41,8 +41,8 @@ public class BookController {
         List<Book> books = (List<Book>) bookRepository.findAll();
 
         for (int i = 0; i < books.size(); i++){
-            BookType bookType = books.get(i).getBookType();
-            System.out.println(bookType == null ? null : bookType);
+            Category category = books.get(i).getCategory();
+            System.out.println(category == null ? null : category);
         }
 
 
@@ -51,13 +51,13 @@ public class BookController {
 
     @RequestMapping("/addbook")
     public String addBookForm(Model model) {
-        model.addAttribute("bookTypes", bookTypeRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "addbook";
     }
 
     @PostMapping("/addbook")
-    public String addBook(Book book, @RequestParam Long bookTypeId) {
-        book.setBookType(bookTypeRepository.findById(bookTypeId).orElseThrow());
+    public String addBook(Book book, @RequestParam Long categoryId) {
+        book.setCategory(categoryRepository.findById(categoryId).orElseThrow());
 
         bookRepository.save(book);
         
@@ -77,13 +77,13 @@ public class BookController {
         Book book = bookRepository.findById(id).orElseThrow();
 
         model.addAttribute("book", book);
-        model.addAttribute("bookTypes", bookTypeRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
 
         return "editbook";
     }
 
     @PostMapping("/editbook/{id}")
-    public String editBook(@PathVariable Long id, Book updatedBook, @RequestParam Long bookTypeId) {
+    public String editBook(@PathVariable Long id, Book updatedBook, @RequestParam Long categoryId) {
         Book book = bookRepository.findById(id).orElseThrow();
 
         book.setTitle(updatedBook.getTitle());
@@ -91,7 +91,7 @@ public class BookController {
         book.setPublicationYear(updatedBook.getPublicationYear());
         book.setIsbn(updatedBook.getIsbn());
         book.setPrice(updatedBook.getPrice());
-        book.setBookType(bookTypeRepository.findById(bookTypeId).orElseThrow());
+        book.setCategory(categoryRepository.findById(categoryId).orElseThrow());
         bookRepository.save(book);
 
         return "redirect:/index";

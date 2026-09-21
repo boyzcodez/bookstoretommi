@@ -23,19 +23,19 @@ public class Book {
     public float price;
 
     @ManyToOne 
-    @JoinColumn(name = "booktypeid")
-    public BookType bookType;
+    @JoinColumn(name = "categoryid")
+    public Category category;
 
         public Book() {
         }
     
-    public Book(String title, String author, int publicationYear, String isbn, float price, BookType bookType) {
+    public Book(String title, String author, int publicationYear, String isbn, float price, Category category) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.price = price;
-        this.bookType = bookType;
+        this.category = category;
     }
     public Long getId() {
         return id;
@@ -79,11 +79,11 @@ public class Book {
     public String toString() {
         return "Book [id=" + id + ", title=" + title + "]";
     }
-    public BookType getBookType() {
-        return bookType;
+    public Category getCategory() {
+        return category;
     }
-    public void setBookType(BookType bookType) {
-        this.bookType = bookType;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     

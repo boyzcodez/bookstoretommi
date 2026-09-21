@@ -90,12 +90,12 @@
                 required
         >
 
-        <label for="bookTypeId">Book type:</label>
-        <select id="bookTypeId" name="bookTypeId" required>
-            <option value="" disabled selected>Select a type</option>
-            <option th:each="bookType : ${bookTypes}"
-                th:value="${bookType.booktypeid}"
-                th:text="${bookType.myBookType}"></option>
+        <label for="categoryId">Category:</label>
+        <select id="categoryId" name="categoryId" required>
+            <option value="" disabled selected>Select a category</option>
+            <option th:each="category : ${categories}"
+                th:value="${category.categoryid}"
+                th:text="${category.name}"></option>
         </select>
 
         <button type="submit">Add Book</button>

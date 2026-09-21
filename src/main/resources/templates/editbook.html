@@ -95,12 +95,12 @@
                 required
         >
 
-        <label for="bookTypeId">Book type:</label>
-        <select id="bookTypeId" name="bookTypeId" required>
-            <option th:each="bookType : ${bookTypes}"
-                th:value="${bookType.booktypeid}"
-                th:text="${bookType.myBookType}"
-                th:selected="${book.bookType != null and book.bookType.booktypeid == bookType.booktypeid}"></option>
+        <label for="categoryId">Category:</label>
+        <select id="categoryId" name="categoryId" required>
+            <option th:each="category : ${categories}"
+                th:value="${category.categoryid}"
+                th:text="${category.name}"
+                th:selected="${book.category != null and book.category.categoryid == category.categoryid}"></option>
         </select>
 
         <button type="submit">Save Changes</button>
