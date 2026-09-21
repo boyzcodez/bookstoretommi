@@ -95,6 +95,14 @@
                 required
         >
 
+        <label for="bookTypeId">Book type:</label>
+        <select id="bookTypeId" name="bookTypeId" required>
+            <option th:each="bookType : ${bookTypes}"
+                th:value="${bookType.booktypeid}"
+                th:text="${bookType.myBookType}"
+                th:selected="${book.bookType != null and book.bookType.booktypeid == bookType.booktypeid}"></option>
+        </select>
+
         <button type="submit">Save Changes</button>
 
     </form>
