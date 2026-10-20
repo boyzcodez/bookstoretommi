@@ -15,6 +15,7 @@ import fi.haaga.bookstoretommi.domain.CategoryRepository;
 @SpringBootApplication
 public class BookstoretommiApplication {
 
+	// assigned port 9094
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoretommiApplication.class, args);
 	}
