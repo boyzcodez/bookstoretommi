@@ -46,8 +46,17 @@ public class BookRepositoryTest {
 
         repo.save(book1);
 
-        List<Book> books = repo.findByTitle("A Testful of Test");
+        assertThat(book1.getId()).isNotNull();
+    }
+
+    @Test void DeleteBook() {
+        List<Book> books = repo.findByTitle("A Farewell to arms");
         assertThat(books).hasSize(1);
-        assertThat(books.get(0).getAuthor()).isEqualTo("Tommi Korhonen");
+
+        Book book = books.get(0);
+
+        repo.delete(book);
+
+        assertThat(repo.findByTitle("A Farewell to arms")).isEmpty();
     }
 }
