@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.haaga.bookstoretommi.domain.Book;
 import fi.haaga.bookstoretommi.domain.BookRepository;
@@ -27,6 +29,11 @@ public class BookController {
         this.categoryRepository = categoryRepository;
     }
 
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
+
     @RequestMapping("/index")
     public String showIndex(Model model){
 
@@ -36,7 +43,7 @@ public class BookController {
 
         model.addAttribute("books", bookList);
 
-        System.out.println("TOMMIN DEBUGAUS");
+        //System.out.println("TOMMIN DEBUGAUS");
 
         List<Book> books = (List<Book>) bookRepository.findAll();
 
@@ -96,4 +103,9 @@ public class BookController {
 
         return "redirect:/index";
     }
+
+    // @RequestMapping(value="/index", method = RequestMethod.GET)
+    // public @ResponseBody List<Book> studentListRest() {
+    //     return (List<Book>) bookRepository.findAll();
+    // }
 }

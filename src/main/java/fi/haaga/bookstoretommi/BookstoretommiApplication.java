@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import fi.haaga.bookstoretommi.domain.AppUser;
+import fi.haaga.bookstoretommi.domain.AppUserRepo;
 import fi.haaga.bookstoretommi.domain.Book;
 import fi.haaga.bookstoretommi.domain.BookRepository;
 import fi.haaga.bookstoretommi.domain.Category;
@@ -18,7 +20,7 @@ public class BookstoretommiApplication {
 	}
 
 	@Bean 
-	public CommandLineRunner initRepository(BookRepository bookRepository, CategoryRepository categoryRepository){
+	public CommandLineRunner initRepository(BookRepository bookRepository, CategoryRepository categoryRepository, AppUserRepo urepository){
 		return (args) -> {
 			Category audioBook = new Category();
 			audioBook.setName("Audio");
@@ -50,6 +52,12 @@ public class BookstoretommiApplication {
 
 			// save it in the repo
 			bookRepository.save(book2);
+
+			// Create users: admin/admin user/user
+			AppUser user1 = new AppUser("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
+			urepository.save(user1);
+			urepository.save(user2);
 		};
 	}
 
